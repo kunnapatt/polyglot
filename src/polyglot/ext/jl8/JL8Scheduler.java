@@ -25,6 +25,7 @@
  ******************************************************************************/
 package polyglot.ext.jl8;
 
+import polyglot.ext.jl7.JL7Scheduler;
 import polyglot.frontend.JLExtensionInfo;
 
 public class JL8Scheduler extends JL7Scheduler {
