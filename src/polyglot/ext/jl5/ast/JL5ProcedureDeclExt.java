@@ -34,7 +34,6 @@ import java.util.Set;
 import polyglot.ast.Formal;
 import polyglot.ast.Node;
 import polyglot.ast.ProcedureDecl;
-import polyglot.ast.ProcedureDeclOps;
 import polyglot.ast.TypeNode;
 import polyglot.ext.jl5.types.Annotations;
 import polyglot.ext.jl5.types.JL5ArrayType;
@@ -64,7 +63,7 @@ import polyglot.visit.TypeBuilder;
 import polyglot.visit.TypeChecker;
 
 public abstract class JL5ProcedureDeclExt extends JL5AnnotatedElementExt
-        implements ProcedureDeclOps {
+        implements JL5ProcedureDeclOps {
     private static final long serialVersionUID = SerialVersionUID.generate();
 
     protected List<ParamTypeNode> typeParams;
@@ -83,7 +82,8 @@ public abstract class JL5ProcedureDeclExt extends JL5AnnotatedElementExt
         return typeParams(node(), typeParams);
     }
 
-    protected <N extends Node> N typeParams(N n, List<ParamTypeNode> typeParams) {
+    protected <N extends Node> N typeParams(N n,
+            List<ParamTypeNode> typeParams) {
         JL5ProcedureDeclExt ext = (JL5ProcedureDeclExt) JL5Ext.ext(n);
         if (CollectionUtil.equals(ext.typeParams, typeParams)) return n;
         if (n == node) {
@@ -159,17 +159,14 @@ public abstract class JL5ProcedureDeclExt extends JL5AnnotatedElementExt
             flags = JL5Flags.setVarArgs(flags);
         }
 
-        return buildTypesFinish(ts,
-                                ct,
-                                flags,
-                                formalTypes,
-                                throwTypes,
-                                typeParams);
+        return ((J5Lang) tb.lang()).buildTypesFinish(pd,
+                                                     ts,
+                                                     ct,
+                                                     flags,
+                                                     formalTypes,
+                                                     throwTypes,
+                                                     typeParams);
     }
-
-    protected abstract Node buildTypesFinish(JL5TypeSystem ts,
-            ParsedClassType ct, Flags flags, List<? extends Type> formalTypes,
-            List<? extends Type> throwTypes, List<TypeVariable> typeParams);
 
     @Override
     public Node disambiguate(AmbiguityRemover ar) throws SemanticException {
@@ -236,7 +233,8 @@ public abstract class JL5ProcedureDeclExt extends JL5AnnotatedElementExt
                 throw new InternalCompilerError("Inconsistent var args flag with procedure type");
             }
             Type last = pi.formalTypes().get(pi.formalTypes().size() - 1);
-            if (!(last instanceof JL5ArrayType && ((JL5ArrayType) last).isVarArg())) {
+            if (!(last instanceof JL5ArrayType
+                    && ((JL5ArrayType) last).isVarArg())) {
                 throw new InternalCompilerError("Inconsistent var args flag with procedure type");
             }
         }
@@ -277,7 +275,8 @@ public abstract class JL5ProcedureDeclExt extends JL5AnnotatedElementExt
         }
         if (printTypeVars && !typeParams.isEmpty()) {
             w.write("<");
-            for (Iterator<ParamTypeNode> iter = typeParams.iterator(); iter.hasNext();) {
+            for (Iterator<ParamTypeNode> iter =
+                    typeParams.iterator(); iter.hasNext();) {
                 TypeNode ptn = iter.next();
                 tr.lang().prettyPrint(ptn, w, tr);
                 if (iter.hasNext()) {
@@ -311,7 +310,8 @@ public abstract class JL5ProcedureDeclExt extends JL5AnnotatedElementExt
             w.allowBreak(6);
             w.write("throws ");
 
-            for (Iterator<TypeNode> i = n.throwTypes().iterator(); i.hasNext();) {
+            for (Iterator<TypeNode> i =
+                    n.throwTypes().iterator(); i.hasNext();) {
                 TypeNode tn = i.next();
                 tr.print(n, tn, w);
 
