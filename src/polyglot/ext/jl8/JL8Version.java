@@ -1,4 +1,3 @@
-
 /*******************************************************************************
  * This file is part of the Polyglot extensible compiler framework.
  *

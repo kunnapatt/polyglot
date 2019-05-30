@@ -13,12 +13,12 @@
  * This program and the accompanying materials are made available under
  * the terms of the Lesser GNU Public License v2.0 which accompanies this
  * distribution.
- * 
+ *
  * The development of the Polyglot project has been supported by a
  * number of funding sources, including DARPA Contract F30602-99-1-0533,
  * monitored by USAF Rome Laboratory, ONR Grants N00014-01-1-0968 and
  * N00014-09-1-0652, NSF Grants CNS-0208642, CNS-0430161, CCF-0133302,
- * and CCF-1054172, AFRL Contract FA8650-10-C-7022, an Alfred P. Sloan 
+ * and CCF-1054172, AFRL Contract FA8650-10-C-7022, an Alfred P. Sloan
  * Research Fellowship, and an Intel Research Ph.D. Fellowship.
  *
  * See README for contributors.
@@ -29,6 +29,7 @@ import java.util.List;
 
 import polyglot.ast.MethodDecl;
 import polyglot.ast.Node;
+import polyglot.ast.ProcedureDecl;
 import polyglot.ext.jl5.types.JL5MethodInstance;
 import polyglot.ext.jl5.types.JL5TypeSystem;
 import polyglot.ext.jl5.types.TypeVariable;
@@ -76,28 +77,27 @@ public class JL5MethodDeclExt extends JL5ProcedureDeclExt {
 
     @Override
     protected Declaration declaration() {
-        MethodDecl n = (MethodDecl) this.node();
+        MethodDecl n = (MethodDecl) node();
         return n.methodInstance();
     }
 
     @Override
-    protected Node buildTypesFinish(JL5TypeSystem ts, ParsedClassType ct,
+    public ProcedureDecl buildTypesFinish(JL5TypeSystem ts, ParsedClassType ct,
             Flags flags, List<? extends Type> formalTypes,
             List<? extends Type> throwTypes, List<TypeVariable> typeParams) {
-        MethodDecl md = (MethodDecl) this.node();
+        MethodDecl md = (MethodDecl) node();
         if (ct.flags().isInterface()) {
             flags = flags.Public().Abstract();
         }
 
-        MethodInstance mi =
-                ts.methodInstance(md.position(),
-                                  ct,
-                                  flags,
-                                  ts.unknownType(md.position()),
-                                  md.name(),
-                                  formalTypes,
-                                  throwTypes,
-                                  typeParams);
+        MethodInstance mi = ts.methodInstance(md.position(),
+                                              ct,
+                                              flags,
+                                              ts.unknownType(md.position()),
+                                              md.name(),
+                                              formalTypes,
+                                              throwTypes,
+                                              typeParams);
         ct.addMethod(mi);
         return md.methodInstance(mi);
     }
@@ -113,17 +113,17 @@ public class JL5MethodDeclExt extends JL5ProcedureDeclExt {
 
     @Override
     public void translate(CodeWriter w, Translator tr) {
-        MethodDecl md = (MethodDecl) this.node();
+        MethodDecl md = (MethodDecl) node();
         JL5MethodDeclExt ext = (JL5MethodDeclExt) JL5Ext.ext(md);
 
         if (ext.isCompilerGenerated()) return;
 
-        superLang().translate(this.node(), w, tr);
+        superLang().translate(node(), w, tr);
     }
 
     @Override
     protected void prettyPrintName(CodeWriter w, PrettyPrinter pp) {
-        MethodDecl n = (MethodDecl) this.node();
+        MethodDecl n = (MethodDecl) node();
         pp.print(n, n.returnType(), w);
         w.write(" " + n.name());
     }

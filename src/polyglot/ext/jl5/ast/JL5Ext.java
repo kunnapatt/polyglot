@@ -39,14 +39,15 @@ public class JL5Ext extends Ext_c {
     private static final long serialVersionUID = SerialVersionUID.generate();
 
     public static JL5Ext ext(Node n) {
-        Ext ans = null;
-        for (Ext e = n.ext(); e != null; e = e.ext())
-            if (e instanceof JL5Ext) ans = e;
-        if (ans == null) {
+        Ext e = n.ext();
+        while (e != null && !(e instanceof JL5Ext)) {
+            e = e.ext();
+        }
+        if (e == null) {
             throw new InternalCompilerError("No JL5 extension object for node "
                     + n + " (" + n.getClass() + ")", n.position());
         }
-        return (JL5Ext) ans;
+        return (JL5Ext) e;
     }
 
     @Override

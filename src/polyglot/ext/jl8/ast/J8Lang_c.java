@@ -25,24 +25,14 @@
  ******************************************************************************/
 package polyglot.ext.jl8.ast;
 
-import polyglot.ast.Block;
-import polyglot.ast.Case;
-import polyglot.ast.Catch;
 import polyglot.ast.Ext;
 import polyglot.ast.Lang;
-import polyglot.ast.New;
-import polyglot.ast.NewOps;
 import polyglot.ast.Node;
 import polyglot.ast.NodeOps;
-import polyglot.ast.Switch;
-import polyglot.ast.Try;
-import polyglot.ext.jl5.ast.JL5CaseOps;
-import polyglot.ext.jl5.ast.JL5SwitchOps;
+import polyglot.ast.ProcedureDecl;
+import polyglot.ext.jl5.ast.JL5ProcedureDeclOps;
 import polyglot.ext.jl7.ast.J7Lang_c;
-import polyglot.ext.jl7.ast.JL7TryOps;
-import polyglot.types.TypeSystem;
 import polyglot.util.InternalCompilerError;
-import polyglot.util.SubtypeSet;
 
 public class J8Lang_c extends J7Lang_c implements J8Lang {
     public static final J8Lang_c instance = new J8Lang_c();
@@ -68,5 +58,10 @@ public class J8Lang_c extends J7Lang_c implements J8Lang {
     @Override
     protected NodeOps NodeOps(Node n) {
         return jl8ext(n);
+    }
+
+    @Override
+    protected JL5ProcedureDeclOps ProcedureDeclOps(ProcedureDecl n) {
+        return (JL5ProcedureDeclOps) jl8ext(n);
     }
 }

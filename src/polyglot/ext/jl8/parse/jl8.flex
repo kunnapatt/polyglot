@@ -59,11 +59,11 @@ import java.util.Set;
 
     public Set<String> keywords() {
         if (keywords == null) {
-	    keywords = new HashMap<>();
-	    init_keywords();
-	}
+        keywords = new HashMap<>();
+        init_keywords();
+    }
 
-	return Collections.unmodifiableSet(keywords.keySet());
+    return Collections.unmodifiableSet(keywords.keySet());
     }
 
     protected void init_keywords() {
@@ -262,7 +262,7 @@ import java.util.Set;
     }
     
     private Token javadoc_token() {
-		return new JavadocToken(pos(sb.length()), sb.toString(), sym.JAVADOC);
+        return new JavadocToken(pos(sb.length()), sb.toString(), sym.JAVADOC);
     }
 
     private String chop(int i, int j) {
@@ -474,8 +474,8 @@ OctalEscape = \\ [0-7]
 
 <JAVADOC_COMMENT> {
     "*/"                         { yybegin(YYINITIAL);
-    							   sb.append(yytext()); 
-    							   return javadoc_token(); }
+                                   sb.append(yytext()); 
+                                   return javadoc_token(); }
 
     <<EOF>>                      { yybegin(YYINITIAL);
                                    eq.enqueue(ErrorInfo.LEXICAL_ERROR,
