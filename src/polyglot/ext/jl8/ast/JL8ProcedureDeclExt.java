@@ -27,42 +27,43 @@ package polyglot.ext.jl8.ast;
 
 import java.util.List;
 
-import polyglot.ast.MethodDecl;
+import polyglot.ast.ProcedureDecl;
+import polyglot.ext.jl5.ast.J5Lang_c;
+import polyglot.ext.jl5.ast.JL5ProcedureDeclOps;
 import polyglot.ext.jl5.types.JL5TypeSystem;
 import polyglot.ext.jl5.types.TypeVariable;
 import polyglot.types.Flags;
-import polyglot.types.MethodInstance;
 import polyglot.types.ParsedClassType;
+import polyglot.types.SemanticException;
 import polyglot.types.Type;
+import polyglot.util.CodeWriter;
 import polyglot.util.SerialVersionUID;
+import polyglot.visit.PrettyPrinter;
 
-public class JL8MethodDeclExt extends JL8ProcedureDeclExt {
+public class JL8ProcedureDeclExt extends JL8Ext implements JL5ProcedureDeclOps {
     private static final long serialVersionUID = SerialVersionUID.generate();
 
     @Override
-    public MethodDecl node() {
-        return (MethodDecl) super.node();
+    public ProcedureDecl node() {
+        return (ProcedureDecl) super.node();
     }
 
     @Override
-    public MethodDecl buildTypesFinish(JL5TypeSystem ts, ParsedClassType ct,
+    public ProcedureDecl buildTypesFinish(JL5TypeSystem ts, ParsedClassType ct,
             Flags flags, List<? extends Type> formalTypes,
-            List<? extends Type> throwTypes, List<TypeVariable> typeParams) {
-        MethodDecl md = node();
-        if (ct.flags().isInterface()) {
-            flags = flags.Public();
-            if (md.body() == null) flags = flags.Abstract();
-        }
+            List<? extends Type> throwTypes, List<TypeVariable> typeParams)
+            throws SemanticException {
+        return J5Lang_c.lang(pred()).buildTypesFinish(node(),
+                                                      ts,
+                                                      ct,
+                                                      flags,
+                                                      formalTypes,
+                                                      throwTypes,
+                                                      typeParams);
+    }
 
-        MethodInstance mi = ts.methodInstance(md.position(),
-                                              ct,
-                                              flags,
-                                              ts.unknownType(md.position()),
-                                              md.name(),
-                                              formalTypes,
-                                              throwTypes,
-                                              typeParams);
-        ct.addMethod(mi);
-        return md.methodInstance(mi);
+    @Override
+    public void prettyPrintHeader(Flags flags, CodeWriter w, PrettyPrinter tr) {
+        superLang().prettyPrintHeader(node(), flags, w, tr);
     }
 }
