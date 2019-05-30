@@ -1,5 +1,5 @@
 interface I {
-	default String foo() {
+	static String foo() {
 		return "Hello World";
 	}
 }
