@@ -59,5 +59,4 @@ extend interface_member_declaration ::=
                l.add(a);
                RESULT = l; 
                          :}
-   	
 ;

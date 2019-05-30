@@ -46,6 +46,7 @@ public class JL8MethodDeclExt extends JL8Ext implements JL5ProcedureDeclOps {
     public MethodDecl buildTypesFinish(JL5TypeSystem ts, ParsedClassType ct,
             Flags flags, List<? extends Type> formalTypes,
             List<? extends Type> throwTypes, List<TypeVariable> typeParams) {
+        System.out.println("hello");
         MethodDecl md = (MethodDecl) node();
         if (ct.flags().isInterface()) {
             flags = flags.Public();

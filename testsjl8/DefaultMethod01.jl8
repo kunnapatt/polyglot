@@ -1,3 +1,5 @@
-default string foo() {
-	return "Hello World" ;
+interface A{
+	default string foo() {
+		return "Hello World" ;
+	}
 }

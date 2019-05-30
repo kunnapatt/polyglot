@@ -25,7 +25,7 @@
  ******************************************************************************/
 package polyglot.ext.jl8;
 
-import polyglot.frontend.JLVersion;
+import polyglot.ext.jl7.JL7Version;
 
 /**
  * Version information for jl7 extension

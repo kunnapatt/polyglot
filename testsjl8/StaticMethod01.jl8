@@ -1,3 +1,5 @@
-static String foo(){
-	return "Hello World";
+interface A{
+	static String foo(){
+		return "Hello World";
+	}
 }
