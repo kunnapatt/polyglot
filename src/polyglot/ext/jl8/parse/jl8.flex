@@ -1,5 +1,5 @@
 /*
- * Java 7 scanner for JFlex. 
+ * Java 8 scanner for JFlex. 
  *
  * This file is part of the Polyglot extensible compiler framework.
  *
@@ -7,7 +7,7 @@
  * 
  */
 
-package polyglot.ext.jl7.parse;
+package polyglot.ext.jl8.parse;
 
 import polyglot.lex.Lexer;
 import polyglot.lex.*;
