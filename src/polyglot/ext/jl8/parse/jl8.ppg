@@ -34,24 +34,24 @@ import polyglot.ext.jl7.types.*;
 
 
 parser Grm extends polyglot.ext.jl7.parse.Grm  {:
-	public final JL7TypeSystem ts;
-	public final JL7NodeFactory nf;
+    public final JL7TypeSystem ts;
+    public final JL7NodeFactory nf;
 
-	public static final List<TypeNode> diamond = new LinkedList<>();
+    public static final List<TypeNode> diamond = new LinkedList<>();
 
-	public Grm(Lexer l, TypeSystem t, NodeFactory n, ErrorQueue q) {
-		super(l, t, n, q);
-		ts = (JL7TypeSystem) t;
-		nf = (JL7NodeFactory) n;
-	}
+    public Grm(Lexer l, TypeSystem t, NodeFactory n, ErrorQueue q) {
+        super(l, t, n, q);
+        ts = (JL7TypeSystem) t;
+        nf = (JL7NodeFactory) n;
+    }
 
 :};
 
 start with goal;
 
 drop { interface_member_declaration ::=
-	abstract_method_declaration;
-	}
+    abstract_method_declaration;
+    }
 
 extend interface_member_declaration ::=
     method_declaration:a {:
