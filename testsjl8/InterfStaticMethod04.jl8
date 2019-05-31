@@ -1,0 +1,7 @@
+interface I {
+	static void foo() { bar(); }
+	static void bar() { foo(); }
+}
+class C implements I {
+	public static void foo() { bar(); }
+}

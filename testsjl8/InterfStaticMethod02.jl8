@@ -1,0 +1,10 @@
+interface I {
+	static String foo() {
+		return "Hello World";
+	}
+}
+class C {
+	void foo() {
+		String s = I.foo();
+	}
+}

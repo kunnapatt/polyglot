@@ -45,6 +45,12 @@ public final class JL8ExtFactory_c extends JL8AbstractExtFactory_c {
     }
 
     @Override
+    public Ext extProcedureDeclImpl() {
+        JL8Ext ext = new JL8ProcedureDeclExt();
+        return ext;
+    }
+
+    @Override
     public Ext extMethodDeclImpl() {
         JL8Ext ext = new JL8MethodDeclExt();
         return ext;
