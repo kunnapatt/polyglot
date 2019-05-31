@@ -36,11 +36,13 @@ import polyglot.ext.jl8.ast.J8Lang_c;
 import polyglot.ext.jl8.ast.JL8ExtFactory_c;
 import polyglot.ext.jl8.parse.Grm;
 import polyglot.ext.jl8.parse.Lexer_c;
+import polyglot.ext.jl8.types.JL8TypeSystem_c;
 import polyglot.frontend.CupParser;
 import polyglot.frontend.Parser;
 import polyglot.frontend.Scheduler;
 import polyglot.frontend.Source;
 import polyglot.main.Version;
+import polyglot.types.TypeSystem;
 import polyglot.util.ErrorQueue;
 
 /**
@@ -78,11 +80,10 @@ public class JL8ExtensionInfo extends JL7ExtensionInfo {
          */
     }
 
-//    @Override
-//    protected TypeSystem createTypeSystem() {
-//        // TODO jl8
-//        return new JL7TypeSystem_c();
-//    }
+    @Override
+    protected TypeSystem createTypeSystem() {
+        return new JL8TypeSystem_c();
+    }
 
     @Override
     public Scheduler createScheduler() {
