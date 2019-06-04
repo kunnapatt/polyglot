@@ -216,13 +216,17 @@ public class ClassBody_c extends Term_c implements ClassBody {
     }
 
     @Override
-    public Node typeCheck(TypeChecker tc) throws SemanticException {
+    public Node typeCheckOverride(Node parent, TypeChecker tc)
+            throws SemanticException {
+        // check duplicate members first, before type-checking individual
+        // members
+        tc = (TypeChecker) tc.enter(parent, this);
         duplicateFieldCheck(tc);
         duplicateConstructorCheck(tc);
         duplicateMethodCheck(tc);
         duplicateMemberClassCheck(tc);
 
-        return this;
+        return null;
     }
 
     @Override
