@@ -262,6 +262,7 @@ polyglot.frontend.JLExtensionInfo "-assert -d out -cp java-out -postopts \"-sour
         MethodDecl07.jl (Semantic, "overridden method is final");
         MethodDecl08a.jl MethodDecl08b.jl (Semantic, "hidden method is not static");
         MethodDecl09.jl;
+        MethodDecl10.jl (Semantic, "Duplicate method");
         Narrowing.jl ;
         New01a.jl New01b.jl;
         New02a.jl New02b.jl (Semantic, "Cannot instantiate an interface");
