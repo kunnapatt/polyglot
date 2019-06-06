@@ -404,6 +404,7 @@ OctalEscape = \\ [0-7]
     "~"    { return op(sym.COMP);       }
     "?"    { return op(sym.QUESTION);   }
     ":"    { return op(sym.COLON);      }
+    "->"   { return op(sym.ARROW);      }
     "=="   { return op(sym.EQEQ);       }
     "<="   { return op(sym.LTEQ);       }
     ">="   { return op(sym.GTEQ);       }

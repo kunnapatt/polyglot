@@ -13,22 +13,22 @@
  * This program and the accompanying materials are made available under
  * the terms of the Lesser GNU Public License v2.0 which accompanies this
  * distribution.
- * 
+ *
  * The development of the Polyglot project has been supported by a
  * number of funding sources, including DARPA Contract F30602-99-1-0533,
  * monitored by USAF Rome Laboratory, ONR Grants N00014-01-1-0968 and
  * N00014-09-1-0652, NSF Grants CNS-0208642, CNS-0430161, CCF-0133302,
- * and CCF-1054172, AFRL Contract FA8650-10-C-7022, an Alfred P. Sloan 
+ * and CCF-1054172, AFRL Contract FA8650-10-C-7022, an Alfred P. Sloan
  * Research Fellowship, and an Intel Research Ph.D. Fellowship.
  *
  * See README for contributors.
  ******************************************************************************/
 package ppg.atoms;
 
-import java.util.*;
+import java.util.Vector;
 
-import ppg.parse.*;
-import ppg.util.*;
+import ppg.parse.Unparse;
+import ppg.util.CodeWriter;
 
 public class Production implements Unparse {
     private Nonterminal lhs;
@@ -116,7 +116,7 @@ public class Production implements Unparse {
             return true;
         }
         else {
-            // one of the lists was not seen all the way, 
+            // one of the lists was not seen all the way,
             // must check that only semantic actions are left
             if (uIdx < u.size()) {
                 for (; uIdx < u.size(); uIdx++) {
@@ -176,9 +176,10 @@ public class Production implements Unparse {
             }
             if (i < rhs.size() - 1) {
                 cw.allowBreak(0);
-                cw.write(" | ");
+                cw.write("  |");
             }
         }
+        cw.newline();
         cw.write(";");
         cw.newline();
         cw.newline();

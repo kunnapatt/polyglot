@@ -28,7 +28,6 @@ package polyglot.ext.jl8.ast;
 import polyglot.ast.Ext;
 import polyglot.ast.ExtFactory;
 import polyglot.ext.jl7.ast.JL7AbstractExtFactory_c;
-import polyglot.ext.jl7.ast.JL7ExtFactory;
 
 public abstract class JL8AbstractExtFactory_c extends JL7AbstractExtFactory_c
         implements JL8ExtFactory {
@@ -39,6 +38,31 @@ public abstract class JL8AbstractExtFactory_c extends JL7AbstractExtFactory_c
 
     public JL8AbstractExtFactory_c(ExtFactory nextExtFactory) {
         super(nextExtFactory);
+    }
+
+    @Override
+    public final Ext extLambda() {
+        Ext e = extLambdaImpl();
+
+        if (nextExtFactory() != null) {
+            Ext e2;
+            if (nextExtFactory() instanceof JL8ExtFactory) {
+                e2 = ((JL8ExtFactory) nextExtFactory()).extLambda();
+            }
+            else {
+                e2 = nextExtFactory().extExpr();
+            }
+            e = composeExts(e, e2);
+        }
+        return postExtLambda(e);
+    }
+
+    protected Ext extLambdaImpl() {
+        return extExprImpl();
+    }
+
+    protected Ext postExtLambda(Ext e) {
+        return postExtExpr(e);
     }
 
 }

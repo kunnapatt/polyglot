@@ -26,7 +26,27 @@
 package polyglot.ext.jl8.types;
 
 import polyglot.ext.jl7.types.JL7TypeSystem_c;
+import polyglot.types.ClassType;
+import polyglot.types.MemberInstance;
+import polyglot.types.MethodInstance;
+import polyglot.types.ReferenceType;
 
 public class JL8TypeSystem_c extends JL7TypeSystem_c implements JL8TypeSystem {
+
+    @Override
+    public boolean isInherited(MemberInstance mi, ReferenceType type) {
+        boolean isInherited = super.isInherited(mi, type);
+        if (!isInherited) return false;
+
+        // static interface methods are never inherited | JLS8 9.4.1
+        if (mi instanceof MethodInstance) {
+            ReferenceType container = mi.container();
+            if (container.isClass()) {
+                ClassType ct = container.toClass();
+                if (ct.superType() == null) return false;
+            }
+        }
+        return true;
+    }
 
 }

@@ -36,10 +36,15 @@ polyglot.ext.jl8.JL8ExtensionInfo "-d out -classpath java-out -assert -noserial 
 	InterfStaticMethod02.jl8;
 	InterfStaticMethod03.jl8;
 	InterfStaticMethod04.jl8 (Semantic, "Method .* not found");
+<<<<<<< HEAD
 	InterfStaticMethod05.jl8 (Semantic, "Method void cannot declare abstract with static");
 	InterfStaticMethod06.jl8;
 	InterfStaticMethod07.jl8 (Semantic, "Method .* cannot access a non-static");
 	InterfStaticMethod08.jl8 (Semantic, "Method .* duplicate");
 	InterfStaticMethod09.jl8 (Semantic, "Method .* declared many static method");
 	
+=======
+	Lambda01.jl8;
+	Lambda02.jl8;
+>>>>>>> branch 'jl8' of https://github.com/kunnapatt/polyglot.git
 }
