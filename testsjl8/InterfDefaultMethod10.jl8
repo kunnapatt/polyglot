@@ -1,0 +1,12 @@
+interface I {
+    default void foo(){
+    ;
+    };
+}
+
+interface II implements I {
+    @Override
+    default void foo(){
+        return 1;
+    };
+}

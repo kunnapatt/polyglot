@@ -1,0 +1,8 @@
+interface I {
+    static void foo(){
+        ;
+    };
+    static void bar(){
+        ;
+    };
+}

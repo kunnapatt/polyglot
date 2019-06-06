@@ -1,0 +1,9 @@
+interface I {
+    default void foo(){
+        System.out.println("Hello world");
+    };
+}
+
+class C implements I {
+    I.super.foo();
+}

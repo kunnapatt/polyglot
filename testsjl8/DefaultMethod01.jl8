@@ -1,5 +1,0 @@
-interface I {
-	default String foo() {
-		return "Hello World";
-	}
-}

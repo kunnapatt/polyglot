@@ -1,0 +1,5 @@
+interface I<T> {
+    static void foo(T s){
+        
+    };
+}

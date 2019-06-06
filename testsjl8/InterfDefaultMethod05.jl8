@@ -1,0 +1,4 @@
+interface I {
+    default void foo();
+    default void foo();
+}

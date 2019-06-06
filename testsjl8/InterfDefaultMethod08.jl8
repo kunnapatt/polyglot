@@ -1,0 +1,5 @@
+interface I {
+    default String foo(){
+        return 3;
+    };
+}

@@ -1,0 +1,8 @@
+interface I {
+    default void foo(){
+        bar();
+    };
+    default void bar(){
+        foo();
+    };
+}

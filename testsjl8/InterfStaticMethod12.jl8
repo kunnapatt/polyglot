@@ -1,0 +1,6 @@
+interface I {
+    static void move(int dx, int dy);
+    static void move(int dx, int dy){
+     ;
+    };
+}

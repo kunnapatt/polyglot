@@ -1,0 +1,10 @@
+interface foo{
+    String a = "Hello World";
+}
+
+interface bar extends foo {
+    static String foo(){
+        String a = "Hello";
+        return this.a;
+    }
+}
