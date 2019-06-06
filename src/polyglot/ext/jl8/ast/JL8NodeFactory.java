@@ -23,46 +23,16 @@
  *
  * See README for contributors.
  ******************************************************************************/
-package ppg.atoms;
+package polyglot.ext.jl8.ast;
 
-import java.util.StringTokenizer;
+import java.util.List;
 
-import ppg.util.CodeWriter;
+import polyglot.ast.Formal;
+import polyglot.ast.Term;
+import polyglot.ext.jl7.ast.JL7NodeFactory;
+import polyglot.util.Position;
 
-public class SemanticAction extends GrammarPart {
-    private String action;
+public interface JL8NodeFactory extends JL7NodeFactory {
 
-    public SemanticAction(String actionCode) {
-        action = actionCode;
-    }
-
-    @Override
-    public Object clone() {
-        return new SemanticAction(action.toString());
-    }
-
-    @Override
-    public void unparse(CodeWriter cw) {
-        cw.write("{:");
-        cw.allowBreak(8);
-        cw.begin(0);
-        StringTokenizer tkz = new StringTokenizer(action, "\n");
-        boolean first = true;
-        while (tkz.hasMoreTokens()) {
-            String line = tkz.nextToken();
-            if (line.trim().isEmpty()) continue;
-            if (first)
-                first = false;
-            else cw.newline();
-            cw.write(line);
-        }
-        cw.end();
-        cw.allowBreak(4);
-        cw.write(":}");
-    }
-
-    @Override
-    public String toString() {
-        return "{:" + action + ":}\n";
-    }
+    Lambda Lambda(Position pos, List<Formal> parameters, Term body);
 }

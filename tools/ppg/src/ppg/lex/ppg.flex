@@ -145,7 +145,7 @@ string_lit_slash={string_lit}\\
     yybegin(YYINITIAL);
     String codeStr = yytext();
     // cut off ":}" from the end of the code string
-    return t(Constant.CODE_STR, codeStr.substring(0, codeStr.length()-2));
+    return t(Constant.CODE_STR, codeStr.substring(0, codeStr.length()-2).trim());
 }
 <CODE> . {
     error("Invalid character in code block: '" + yytext() + "'");

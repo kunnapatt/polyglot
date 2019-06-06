@@ -43,6 +43,10 @@ polyglot.ext.jl7.JL7ExtensionInfo "-d out -classpath java-out -assert -noserial 
 	Diamond09.jl7;
 	Diamond10.jl7;
 	FloatLit01.jl7;
+	Inherit01.jl7 (Semantic, "Name clash.* same erasure");
+	Inherit02.jl7 (Semantic, "Name clash.* same erasure");
+	Inherit03.jl7 (Semantic, "Name clash.* same erasure");
+	Inherit04.jl7 (Semantic, "Name clash.* same erasure");
 	IntLit01.jl7;
 	IntLit02.jl7 (Syntax), (Syntax),(Syntax),(Syntax);
 	IntLit02a.jl7 (Syntax);

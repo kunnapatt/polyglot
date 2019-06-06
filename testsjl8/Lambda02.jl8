@@ -1,0 +1,12 @@
+interface FI<T> {
+    void foo(T x);
+}
+
+class C {
+    <T> void bar(FI<T> f) {
+    }
+
+    void baz() {
+        bar((x) -> System.out.println(x));
+    }
+}

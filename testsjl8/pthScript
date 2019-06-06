@@ -36,4 +36,6 @@ polyglot.ext.jl8.JL8ExtensionInfo "-d out -classpath java-out -assert -noserial 
 	InterfStaticMethod02.jl8;
 	InterfStaticMethod03.jl8;
 	InterfStaticMethod04.jl8 (Semantic, "Method .* not found");
+	Lambda01.jl8;
+	Lambda02.jl8;
 }

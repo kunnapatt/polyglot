@@ -31,9 +31,9 @@ import polyglot.ast.NodeFactory;
 import polyglot.ext.jl5.ast.JL5ExtFactory_c;
 import polyglot.ext.jl7.JL7ExtensionInfo;
 import polyglot.ext.jl7.ast.JL7ExtFactory_c;
-import polyglot.ext.jl7.ast.JL7NodeFactory_c;
 import polyglot.ext.jl8.ast.J8Lang_c;
 import polyglot.ext.jl8.ast.JL8ExtFactory_c;
+import polyglot.ext.jl8.ast.JL8NodeFactory_c;
 import polyglot.ext.jl8.parse.Grm;
 import polyglot.ext.jl8.parse.Lexer_c;
 import polyglot.ext.jl8.types.JL8TypeSystem_c;
@@ -64,8 +64,7 @@ public class JL8ExtensionInfo extends JL7ExtensionInfo {
 
     @Override
     protected NodeFactory createNodeFactory() {
-        // TODO jl8
-        return new JL7NodeFactory_c(J8Lang_c.instance,
+        return new JL8NodeFactory_c(J8Lang_c.instance,
                                     new JL8ExtFactory_c(new JL7ExtFactory_c(new JL5ExtFactory_c())));
         /*
         JL5Options opt = (JL5Options) getOptions();

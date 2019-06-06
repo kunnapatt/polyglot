@@ -23,46 +23,28 @@
  *
  * See README for contributors.
  ******************************************************************************/
-package ppg.atoms;
 
-import java.util.StringTokenizer;
+package polyglot.ext.jl8.ast;
 
-import ppg.util.CodeWriter;
+import java.util.List;
 
-public class SemanticAction extends GrammarPart {
-    private String action;
+import polyglot.ast.Expr;
+import polyglot.ast.Formal;
+import polyglot.ast.Term;
 
-    public SemanticAction(String actionCode) {
-        action = actionCode;
-    }
+/**
+ * A {@code Lambda} represents a lambda expression.
+ */
+public interface Lambda extends Expr {
+    /** Lambda parameters */
+    List<Formal> parameters();
 
-    @Override
-    public Object clone() {
-        return new SemanticAction(action.toString());
-    }
+    /** Set the lambda parameters. */
+    Lambda parameters(List<Formal> parameters);
 
-    @Override
-    public void unparse(CodeWriter cw) {
-        cw.write("{:");
-        cw.allowBreak(8);
-        cw.begin(0);
-        StringTokenizer tkz = new StringTokenizer(action, "\n");
-        boolean first = true;
-        while (tkz.hasMoreTokens()) {
-            String line = tkz.nextToken();
-            if (line.trim().isEmpty()) continue;
-            if (first)
-                first = false;
-            else cw.newline();
-            cw.write(line);
-        }
-        cw.end();
-        cw.allowBreak(4);
-        cw.write(":}");
-    }
+    /** The lambda body, which can be a block or an expression. */
+    Term body();
 
-    @Override
-    public String toString() {
-        return "{:" + action + ":}\n";
-    }
+    /** Set the lambda body. */
+    Lambda body(Term body);
 }
